@@ -1,0 +1,11 @@
+{
+  "scripts": {
+    "build": "esbuild src/* --bundle --sourcemap --outdir=scripts/",
+    "watch": "esbuild src/* --bundle --sourcemap --outdir=scripts/ --watch"
+  },
+  "devDependencies": {
+    "@types/chrome": "^0.0.198",
+    "esbuild": "^0.15.11",
+    "typescript": "^4.8.4"
+  }
+}

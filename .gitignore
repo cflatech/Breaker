@@ -1,0 +1,3 @@
+scripts/**
+!scripts/.gitkeep
+node_modules
