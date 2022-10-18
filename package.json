@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "build": "esbuild src/* --bundle --sourcemap --outdir=scripts/",
+    "build": "tsc && esbuild src/* --bundle --sourcemap --outdir=scripts/",
     "watch": "esbuild src/* --bundle --sourcemap --outdir=scripts/ --watch"
   },
   "devDependencies": {
