@@ -18,7 +18,6 @@ document.body.addEventListener("click", function (e) {
   if (!element) {
     return;
   }
-  console.log(element);
 
   launchBreakElement(element);
 });
