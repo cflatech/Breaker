@@ -6,6 +6,7 @@ export class Explosion {
 
   private context: CanvasRenderingContext2D;
   private image: HTMLImageElement;
+  private sound: HTMLAudioElement;
 
   constructor(private canvas: HTMLCanvasElement, private element: HTMLElement) {
     const context = canvas.getContext("2d");
@@ -17,6 +18,9 @@ export class Explosion {
     this.image = new Image();
     this.image.src = imageUrl;
 
+    const soundUrl = chrome.runtime.getURL("sounds/explosion.mp3");
+    this.sound = new Audio();
+    this.sound.src = soundUrl;
     this.context = context;
   }
 
@@ -60,5 +64,9 @@ export class Explosion {
       spriteDrawSize
     );
     this.spriteFrame++;
+  }
+
+  playSound() {
+    this.sound.play();
   }
 }

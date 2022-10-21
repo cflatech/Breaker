@@ -4,8 +4,9 @@ export const launchBreakElement = (element: HTMLElement) => {
   const canvas = createCanvasElement(element);
   document.body.appendChild(canvas);
 
-  const drawCircle = new Explosion(canvas, element);
-  drawCircle.draw(performance.now());
+  const explosion = new Explosion(canvas, element);
+  explosion.draw(performance.now());
+  explosion.playSound();
 };
 
 const createCanvasElement = (element: HTMLElement) => {
