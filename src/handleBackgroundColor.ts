@@ -1,3 +1,5 @@
+import { canvasClass } from "./breakElement";
+
 const selectedColor = "#CCFFFF";
 let previousElement: HTMLElement | null = null;
 
@@ -11,8 +13,11 @@ export const handleBackGroundColor = (element: HTMLElement) => {
     previousElement = element;
   }
 
-  resetColor(previousElement);
-  setColor(element);
+  // Canvasを選択させないための苦肉の策
+  if (element.className !== canvasClass) {
+    resetColor(previousElement);
+    setColor(element);
+  }
   previousElement = element;
 };
 

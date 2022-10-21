@@ -41,6 +41,7 @@ export class Explosion {
       this.element.style.display = "none";
       this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
       this.canvas.remove();
+      this.sound.remove();
       return;
     }
 

@@ -1,5 +1,7 @@
 import { Explosion } from "./explosion";
 
+export const canvasClass = "breaker-explosion";
+
 export const launchBreakElement = (element: HTMLElement) => {
   const canvas = createCanvasElement(element);
   document.body.appendChild(canvas);
@@ -12,6 +14,7 @@ export const launchBreakElement = (element: HTMLElement) => {
 const createCanvasElement = (element: HTMLElement) => {
   const elementRect = element.getBoundingClientRect();
   const canvas = document.createElement("canvas");
+  canvas.className = canvasClass;
   canvas.style.position = "absolute";
 
   const rectMax = Math.max(elementRect.width, elementRect.height);
