@@ -13,10 +13,19 @@ const createCanvasElement = (element: HTMLElement) => {
   const elementRect = element.getBoundingClientRect();
   const canvas = document.createElement("canvas");
   canvas.style.position = "absolute";
+
+  const rectMax = Math.max(elementRect.width, elementRect.height);
   canvas.width = elementRect.width;
   canvas.height = elementRect.height;
-  canvas.style.top = `${elementRect.top + scrollY}px`;
-  canvas.style.left = `${elementRect.left + scrollX}px`;
+
+  canvas.width = rectMax;
+  canvas.height = rectMax;
+  canvas.style.top = `${
+    elementRect.top + scrollY + (elementRect.height - rectMax) / 2
+  }px`;
+  canvas.style.left = `${
+    elementRect.left + scrollX + (elementRect.width - rectMax) / 2
+  }px`;
 
   return canvas;
 };

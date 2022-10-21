@@ -21,7 +21,7 @@
   "web_accessible_resources": [
     {
       "resources": ["images/explosion.png", "sounds/explosion.mp3"],
-      "matches": ["https://allabout.co.jp/*"]
+      "matches": ["https://*/*"]
     }
   ]
 }
