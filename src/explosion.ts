@@ -7,7 +7,7 @@ export class Explosion {
   private context: CanvasRenderingContext2D;
   private image: HTMLImageElement;
 
-  constructor(private canvas: HTMLCanvasElement) {
+  constructor(private canvas: HTMLCanvasElement, private element: HTMLElement) {
     const context = canvas.getContext("2d");
     if (!context) {
       throw new Error("failt get canvas context");
@@ -29,15 +29,25 @@ export class Explosion {
       return;
     }
 
+    if (this.spriteFrame === 0) {
+      this.element.style.opacity = "0";
+    }
+
     if (this.spriteFrame === this.spriteEndFrame) {
+      this.element.style.display = "none";
       this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
       this.canvas.remove();
       return;
     }
 
     requestAnimationFrame(this.draw);
-    const spriteDrawSize = Math.min(this.canvas.width, this.canvas.height);
     this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    this.drawExplosion();
+    this.beforeFrameTime = timestamp;
+  };
+
+  private drawExplosion() {
+    const spriteDrawSize = Math.min(this.canvas.width, this.canvas.height);
     this.context.drawImage(
       this.image,
       this.spriteSize * this.spriteFrame,
@@ -49,8 +59,6 @@ export class Explosion {
       spriteDrawSize,
       spriteDrawSize
     );
-
-    this.beforeFrameTime = timestamp;
     this.spriteFrame++;
-  };
+  }
 }

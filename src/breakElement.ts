@@ -1,11 +1,10 @@
 import { Explosion } from "./explosion";
 
 export const launchBreakElement = (element: HTMLElement) => {
-  element.style.opacity = "0";
   const canvas = createCanvasElement(element);
   document.body.appendChild(canvas);
 
-  const drawCircle = new Explosion(canvas);
+  const drawCircle = new Explosion(canvas, element);
   drawCircle.draw(performance.now());
 };
 
