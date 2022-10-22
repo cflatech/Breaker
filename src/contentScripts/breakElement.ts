@@ -1,18 +1,18 @@
-import { BreakerState, drawExplosionKey, playSoundKey } from "./breakerState";
+import { playSoundKey } from "./breakerState";
 import { Explosion } from "./explosion";
 
 export const canvasClass = "breaker-explosion";
 
 export const launchBreakElement = (
   element: HTMLElement,
-  state: BreakerState
+  canPlaySound: boolean = true
 ) => {
   const canvas = createCanvasElement(element);
   document.body.appendChild(canvas);
 
   const explosion = new Explosion(canvas, element);
-  state.get(drawExplosionKey) && explosion.draw(performance.now());
-  state.get(playSoundKey) && explosion.playSound();
+  explosion.draw(performance.now());
+  canPlaySound && explosion.playSound();
 };
 
 const createCanvasElement = (element: HTMLElement) => {

@@ -1,17 +1,11 @@
 export const selectElementKey = "canSelectElement";
-export const drawExplosionKey = "canDrawExplosion";
 export const playSoundKey = "canPlaySound";
-export type Key =
-  | typeof selectElementKey
-  | typeof drawExplosionKey
-  | typeof playSoundKey;
+export type Key = typeof selectElementKey | typeof playSoundKey;
 
 export class BreakerState {
   constructor() {
     localStorage.getItem(selectElementKey) ??
       localStorage.setItem(selectElementKey, this.getStateValue(true));
-    localStorage.getItem(drawExplosionKey) ??
-      localStorage.setItem(drawExplosionKey, this.getStateValue(true));
     localStorage.getItem(playSoundKey) ??
       localStorage.setItem(playSoundKey, this.getStateValue(true));
   }

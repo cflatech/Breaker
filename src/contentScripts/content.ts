@@ -1,9 +1,4 @@
-import {
-  BreakerState,
-  drawExplosionKey,
-  playSoundKey,
-  selectElementKey,
-} from "./breakerState";
+import { BreakerState, playSoundKey, selectElementKey } from "./breakerState";
 import { launchBreakElement } from "./breakElement";
 import { handleBackGroundColor } from "./handleBackgroundColor";
 import { selectElement } from "./selectElement";
@@ -12,11 +7,9 @@ const state = new BreakerState();
 async function updateState() {
   const storage = await chrome.storage.local.get([
     selectElementKey,
-    drawExplosionKey,
     playSoundKey,
   ]);
   state.set(selectElementKey, storage[selectElementKey]);
-  state.set(drawExplosionKey, storage[drawExplosionKey]);
   state.set(playSoundKey, storage[playSoundKey]);
 }
 
@@ -45,5 +38,5 @@ document.body.addEventListener("click", async (e) => {
     return;
   }
 
-  launchBreakElement(element, state);
+  launchBreakElement(element, state.get(playSoundKey));
 });
