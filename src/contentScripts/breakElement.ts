@@ -1,4 +1,3 @@
-import { playSoundKey } from "./breakerState";
 import { Explosion } from "./explosion";
 
 export const canvasClass = "breaker-explosion";
