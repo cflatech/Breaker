@@ -14,11 +14,11 @@ export class Explosion {
       throw new Error("failt get canvas context");
     }
 
-    const imageUrl = chrome.runtime.getURL("images/explosion.png");
+    const imageUrl = chrome.runtime.getURL("../images/explosion.png");
     this.image = new Image();
     this.image.src = imageUrl;
 
-    const soundUrl = chrome.runtime.getURL("sounds/explosion.mp3");
+    const soundUrl = chrome.runtime.getURL("../sounds/explosion.mp3");
     this.sound = new Audio();
     this.sound.src = soundUrl;
     this.context = context;
