@@ -1,9 +1,31 @@
+import {
+  BreakerState,
+  drawExplosionKey,
+  playSoundKey,
+  selectElementKey,
+} from "./breakerState";
 import { launchBreakElement } from "./breakElement";
 import { handleBackGroundColor } from "./handleBackgroundColor";
 import { selectElement } from "./selectElement";
 
-document.body.addEventListener("mousemove", function (e) {
-  const element = selectElement({ x: e.pageX, y: e.pageY });
+const state = new BreakerState();
+async function updateState() {
+  const storage = await chrome.storage.local.get([
+    selectElementKey,
+    drawExplosionKey,
+    playSoundKey,
+  ]);
+  state.set(selectElementKey, storage[selectElementKey]);
+  state.set(drawExplosionKey, storage[drawExplosionKey]);
+  state.set(playSoundKey, storage[playSoundKey]);
+}
+
+document.body.addEventListener("mousemove", async (e) => {
+  updateState();
+  const element = selectElement(
+    { x: e.pageX, y: e.pageY },
+    state.get(selectElementKey)
+  );
   if (!element) {
     return;
   }
@@ -11,17 +33,17 @@ document.body.addEventListener("mousemove", function (e) {
   handleBackGroundColor(element);
 });
 
-document.body.addEventListener("click", function (e) {
+document.body.addEventListener("click", async (e) => {
+  if (state.get(selectElementKey) === false) {
+    return;
+  }
   e.preventDefault();
+
   const mousePosition = { x: e.pageX, y: e.pageY };
-  const element = selectElement(mousePosition);
+  const element = await selectElement(mousePosition);
   if (!element) {
     return;
   }
 
-  launchBreakElement(element);
-});
-
-chrome.runtime.onMessage.addListener((message, sender, sendRespose) => {
-  console.log(message);
+  launchBreakElement(element, state);
 });

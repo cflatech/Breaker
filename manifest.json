@@ -11,7 +11,7 @@
   },
   "content_scripts": [
     {
-      "js": ["scripts/content.js"],
+      "js": ["scripts/contentScripts/content.js"],
       "matches": ["https://*/*"]
     }
   ],
@@ -23,5 +23,6 @@
       "resources": ["images/explosion.png", "sounds/explosion.mp3"],
       "matches": ["https://*/*"]
     }
-  ]
+  ],
+  "permissions": ["storage"]
 }
