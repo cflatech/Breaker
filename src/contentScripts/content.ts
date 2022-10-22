@@ -1,24 +1,23 @@
-import { BreakerState, playSoundKey, selectElementKey } from "./breakerState";
+import { playSoundKey, selectElementKey } from "./breakerState";
 import { launchBreakElement } from "./breakElement";
 import { handleBackGroundColor } from "./handleBackgroundColor";
 import { selectElement } from "./selectElement";
 
-const state = new BreakerState();
+let canSelectElement: boolean = false;
+let canPlaySound: boolean = false;
 async function updateState() {
   const storage = await chrome.storage.local.get([
     selectElementKey,
     playSoundKey,
   ]);
-  state.set(selectElementKey, storage[selectElementKey]);
-  state.set(playSoundKey, storage[playSoundKey]);
+  canSelectElement = storage[selectElementKey];
+  canPlaySound = storage[playSoundKey];
 }
 
 document.body.addEventListener("mousemove", async (e) => {
   updateState();
-  const element = selectElement(
-    { x: e.pageX, y: e.pageY },
-    state.get(selectElementKey)
-  );
+  const element = selectElement({ x: e.pageX, y: e.pageY }, canSelectElement);
+
   if (!element) {
     return;
   }
@@ -27,7 +26,7 @@ document.body.addEventListener("mousemove", async (e) => {
 });
 
 document.body.addEventListener("click", async (e) => {
-  if (state.get(selectElementKey) === false) {
+  if (canSelectElement === false) {
     return;
   }
   e.preventDefault();
@@ -38,5 +37,5 @@ document.body.addEventListener("click", async (e) => {
     return;
   }
 
-  launchBreakElement(element, state.get(playSoundKey));
+  launchBreakElement(element, canPlaySound);
 });
