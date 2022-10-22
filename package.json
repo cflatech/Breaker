@@ -1,7 +1,7 @@
 {
   "scripts": {
-    "build": "tsc && esbuild src/* --bundle --sourcemap --outdir=scripts/",
-    "watch": "esbuild src/* --bundle --sourcemap --outdir=scripts/ --watch"
+    "build": "tsc && esbuild src/contentScripts/content.ts --bundle --sourcemap --outdir=scripts/",
+    "watch": "esbuild src/**/* --bundle --sourcemap --outdir=scripts/ --watch"
   },
   "devDependencies": {
     "@types/chrome": "^0.0.198",

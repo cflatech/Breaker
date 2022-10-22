@@ -21,3 +21,7 @@ document.body.addEventListener("click", function (e) {
 
   launchBreakElement(element);
 });
+
+chrome.runtime.onMessage.addListener((message, sender, sendRespose) => {
+  console.log(message);
+});
