@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "build": "tsc && esbuild src/contentScripts/content.ts src/popup/popup.ts --bundle --sourcemap --outdir=scripts/",
+    "build": "tsc && esbuild src/contentScripts/content.ts src/popup/popup.ts --bundle --outdir=scripts/",
     "watch": "esbuild  src/contentScripts/content.ts src/popup/popup.ts --bundle --sourcemap --outdir=scripts/ --watch"
   },
   "devDependencies": {
